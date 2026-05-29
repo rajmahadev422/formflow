@@ -49,7 +49,6 @@ export default function CreatePage() {
       const form = await res.json();
 
       if (!res.ok) return console.log(res.statusText);
-      console.log(form);
       setSaved(true);
       reset();
       setTimeout(() => router.push(`/view/${form._id}`), 800);
