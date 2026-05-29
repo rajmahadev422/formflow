@@ -8,13 +8,27 @@ export default function FormsPage() {
 
   const load = async () => {
     setLoading(true);
-    const res = await fetch("/api/forms");
-    const data = await res.json();
-    setForms(data);
-    setLoading(false);
+
+    try {
+      const res = await fetch("/api/forms");
+
+      if (!res.ok) {
+        console.log(res.statusText);
+        return;
+      }
+      const data = await res.json();
+      setForms(data);
+      setLoading(false);
+    } catch (err) {
+      console.log(err.message);
+    } finally {
+      setLoading(false)
+    }
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const deleteForm = async (id) => {
     if (!confirm("Delete this form?")) return;
@@ -27,12 +41,16 @@ export default function FormsPage() {
       {/* Dashboard Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="font-['DM_Serif_Display',serif] text-3xl m-0">My Forms</h1>
+          <h1 className="font-['DM_Serif_Display',serif] text-3xl m-0">
+            My Forms
+          </h1>
           <p className="text-(--text-2) mt-1 text-sm">
             {forms.length} form{forms.length !== 1 ? "s" : ""} created
           </p>
         </div>
-        <Link href="/forms/create" className="btn-primary">+ New Form</Link>
+        <Link href="/forms/create" className="btn-primary">
+          + New Form
+        </Link>
       </div>
 
       {/* Main Content States */}
@@ -41,8 +59,12 @@ export default function FormsPage() {
       ) : forms.length === 0 ? (
         <div className="bg-(--surface) border border-(--border) rounded-xl py-16 px-8 text-center">
           <div className="text-5xl mb-4">📋</div>
-          <p className="text-(--text-2) mb-6">No forms yet. Create your first one!</p>
-          <Link href="/create" className="btn-primary">✨ Create Form</Link>
+          <p className="text-(--text-2) mb-6">
+            No forms yet. Create your first one!
+          </p>
+          <Link href="/create" className="btn-primary">
+            ✨ Create Form
+          </Link>
         </div>
       ) : forms?.error ? (
         <div className="bg-(--surface) border border-(--border) rounded-xl py-16 px-8 text-center">
@@ -62,33 +84,34 @@ export default function FormsPage() {
               <div className="w-10 h-10 rounded-xl bg-(--accent-light) flex items-center justify-center text-[1.1rem] shrink-0">
                 📝
               </div>
-              
+
               {/* Meta Content & Truncation */}
               <div className="flex-1 min-w-0">
                 <div className="font-semibold text-[0.95rem] text-(--text) whitespace-nowrap overflow-hidden text-ellipsis">
                   {form.title}
                 </div>
                 <div className="text-[0.78rem] text-(--text-3) mt-0.5">
-                  {form.fields.length} fields · {new Date(form.createdAt).toLocaleDateString()}
+                  {form.fields.length} fields ·{" "}
+                  {new Date(form.createdAt).toLocaleDateString()}
                 </div>
               </div>
-              
+
               {/* Actions Button Group */}
               <div className="flex gap-2 shrink-0 flex-wrap justify-end">
-                <Link 
-                  href={`/view/${form._id}`} 
+                <Link
+                  href={`/view/${form._id}`}
                   className="bg-(--accent-light) text-(--accent) rounded-[7px] px-3.5 py-1.5 text-xs font-medium no-underline"
                 >
                   Fill
                 </Link>
-                <Link 
-                  href={`/forms/data/${form._id}`} 
+                <Link
+                  href={`/forms/data/${form._id}`}
                   className="bg-(--success-light) text-(--success) rounded-[7px] px-3.5 py-1.5 text-xs font-medium no-underline"
                 >
                   Data
                 </Link>
-                <button 
-                  onClick={() => deleteForm(form._id)} 
+                <button
+                  onClick={() => deleteForm(form._id)}
                   className="btn-danger px-3 py-1.5 text-xs"
                 >
                   🗑

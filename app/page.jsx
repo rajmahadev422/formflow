@@ -1,3 +1,4 @@
+import LoginButton from "@/components/LoginButton";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 

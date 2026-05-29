@@ -2,9 +2,12 @@
 import Link from "next/link";
 import { useTheme } from "./ThemeProvider";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/lib/store";
+import LoginButton from "./LoginButton";
 
 export default function Navbar() {
   const { theme, toggle } = useTheme();
+  const {user} = useAuth();
   const path = usePathname();
 
   return (
@@ -45,6 +48,7 @@ export default function Navbar() {
       >
         {theme === "dark" ? "☀️" : "🌙"}
       </button>
+        <LoginButton />
     </nav>
   );
 }
