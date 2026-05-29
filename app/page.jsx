@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
 const steps = [
@@ -30,6 +31,7 @@ const features = [
 export default function LandingPage() {
   return (
     <div className="bg-(--bg)">
+      <Navbar />
       {/* Hero Section */}
       <section className="text-center p-8">
         <div className="inline-flex items-center gap-2 bg-(--accent-light) text-(--accent) rounded-full px-4 py-1.2 text-xs font-semibold mb-6 tracking-widest">

@@ -1,6 +1,5 @@
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "FormFlow – Build Forms Fast",
