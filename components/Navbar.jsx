@@ -21,7 +21,7 @@ export default function Navbar() {
       <div className="flex-1 gap-1 hidden sm:flex">
         {[
           { href: "/forms/create", label: "Create" },
-          { href: "/forms", label: "My Forms" },
+          { href: "/forms", label: "My Forms" }
         ].map(({ href, label }) => {
           const isActive = path === href;
           return (

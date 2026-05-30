@@ -43,7 +43,6 @@ export default function LoginButton() {
         {/* Dropdown Menu Overlay */}
         {isOpen && (
           <div className="absolute right-0 mt-2 w-48 rounded-xl bg-(--surface) border border-(--border) p-1 shadow-lg z-50 flex flex-col gap-0.5 fade-up">
-            
             {/* User Meta Data Profile Header */}
             {session?.user?.name && (
               <div className="px-3 py-2 text-xs border-b border-(--border) mb-1">
@@ -67,6 +66,21 @@ export default function LoginButton() {
               <span>👤</span> Profile
             </Link>
 
+            <Link
+              href="/forms"
+              onClick={() => setIsOpen(false)}
+              className="w-full text-left px-3 py-2 text-sm text-(--text-2) hover:text-(--text) hover:bg-(--bg-2) rounded-lg transition-colors no-underline inline-flex items-center gap-2"
+            >
+              <span>🧾</span> Forms
+            </Link>
+
+            <Link
+              href="/forms/create"
+              onClick={() => setIsOpen(false)}
+              className="w-full text-left px-3 py-2 text-sm text-(--text-2) hover:text-(--text) hover:bg-(--bg-2) rounded-lg transition-colors no-underline inline-flex items-center gap-2"
+            >
+              <span>📝</span>Create Forms
+            </Link>
             {/* Menu Link 2: Interactive Logout Action */}
             <button
               onClick={() => {
@@ -77,7 +91,6 @@ export default function LoginButton() {
             >
               <span>🚪</span> Logout
             </button>
-            
           </div>
         )}
       </div>
@@ -86,8 +99,8 @@ export default function LoginButton() {
 
   // Condition 2: Unauthenticated State (Displays Base Login Action Trigger)
   return (
-    <button 
-      onClick={() => signIn("google")} 
+    <button
+      onClick={() => signIn("google")}
       className="btn-primary px-4 py-2 text-sm"
     >
       Login
