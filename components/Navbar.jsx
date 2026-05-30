@@ -7,11 +7,10 @@ import LoginButton from "./LoginButton";
 
 export default function Navbar() {
   const { theme, toggle } = useTheme();
-  const {user} = useAuth();
   const path = usePathname();
 
   return (
-    <nav className="sticky top-0 z-100 flex h-15 items-center gap-6 border-b border-(--border) bg-(--surface) px-6 backdrop-blur-md">
+    <nav className="sticky top-0 z-100 justify-between flex h-15 items-center gap-6 border-b border-(--border) bg-(--surface) px-6 backdrop-blur-md">
       <Link
         href="/"
         className="mr-2 text-[1.3rem] font-normal no-underline text-(--accent) font-['DM_Serif_Display',serif]"
@@ -19,7 +18,7 @@ export default function Navbar() {
         FormFlow
       </Link>
 
-      <div className="flex flex-1 gap-1">
+      <div className="flex-1 gap-1 hidden sm:flex">
         {[
           { href: "/forms/create", label: "Create" },
           { href: "/forms", label: "My Forms" },
@@ -40,15 +39,16 @@ export default function Navbar() {
           );
         })}
       </div>
-
-      <button
-        onClick={toggle}
-        aria-label="Toggle theme"
-        className="flex items-center rounded-lg border border-(--border) bg-(--bg-2) px-2.4 py-1.6 text-base text-(--text-2) transition-all duration-150 cursor-pointer"
-      >
-        {theme === "dark" ? "☀️" : "🌙"}
-      </button>
+      <div className="flex gap-5">
+        <button
+          onClick={toggle}
+          aria-label="Toggle theme"
+          className="flex items-center rounded-lg border border-(--border) bg-(--bg-2) px-2.4 py-1.6 text-base text-(--text-2) transition-all duration-150 cursor-pointer"
+        >
+          {theme === "dark" ? "☀️" : "🌙"}
+        </button>
         <LoginButton />
+      </div>
     </nav>
   );
 }
