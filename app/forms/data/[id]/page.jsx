@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import CopyButton from "@/components/CopyButton";
 
 export default function DataPage() {
   const { id } = useParams();
@@ -86,16 +87,14 @@ export default function DataPage() {
           </p>
         </div>
         <div className="flex gap-3 flex-wrap">
-          <Link href={`/view/${id}`} className="btn-ghost">
-            Fill Form
-          </Link>
+          <CopyButton formId={id} />
           {submissions.length > 0 && (
-              <button
-                onClick={handleExportExcel}
-                className="btn-ghost border border-(--border)"
-              >
-                📊 Download Excel
-              </button>
+            <button
+              onClick={handleExportExcel}
+              className="btn-ghost border border-(--border)"
+            >
+              📊 Download Excel
+            </button>
           )}
         </div>
       </div>
