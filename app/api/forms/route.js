@@ -2,10 +2,14 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Form from "@/models/Form";
 
-export async function GET() {
+export async function GET(req) {
+
+  const userEmail = req.headers.get('x-user-email');
+  if(!userEmail) return NextResponse.json({error: "User not found"}, {status: 404});
+  
   try {
     await connectDB();
-    const forms = await Form.find({}).sort({ createdAt: -1 });
+    const forms = await Form.find({userEmail}).sort({ createdAt: -1 });
     return NextResponse.json(forms);
   } catch {
     return NextResponse.json(
@@ -16,11 +20,15 @@ export async function GET() {
 }
 
 export async function POST(req) {
+
+  const userEmail = req.headers.get('x-user-email');
+
+  if(!userEmail) return NextResponse.json({error: "User not found"}, {status: 404});
   try {
     await connectDB();
     const body = await req.json();
     const form = await Form.create(body);
-    return NextResponse.json(form, { status: 201 });
+    return NextResponse.json({ ...form, userEmail }, { status: 201 });
   } catch {
     return NextResponse.json(
       { error: "Failed to create form" },

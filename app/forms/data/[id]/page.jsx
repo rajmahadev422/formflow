@@ -54,39 +54,6 @@ export default function DataPage() {
     writeFile(workbook, safeFileName);
   };
 
-  // JSON Export Handler
-  const handleExportJSON = () => {
-    if (!form || submissions.length === 0) return;
-
-    // Structure the JSON export with form metadata and the raw submission array
-    const exportPayload = {
-      formId: id,
-      formTitle: form.title,
-      exportedAt: new Date().toISOString(),
-      submissions: submissions.map((sub) => ({
-        submissionId: sub._id,
-        submittedAt: sub.submittedAt,
-        data: sub.data,
-      })),
-    };
-
-    // Convert payload to a readable, formatted JSON string
-    const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
-      JSON.stringify(exportPayload, null, 2),
-    )}`;
-
-    // Create a virtual anchor element to trigger the download smoothly
-    const downloadAnchor = document.createElement("a");
-    downloadAnchor.setAttribute("href", jsonString);
-
-    const safeFileName = `${form.title.replace(/[^a-z0-9]/gi, "_").toLowerCase()}_data.json`;
-    downloadAnchor.setAttribute("download", safeFileName);
-
-    document.body.appendChild(downloadAnchor);
-    downloadAnchor.click();
-    downloadAnchor.remove();
-  };
-
   if (loading)
     return <div className="text-center py-24 text-(--text-3)">Loading…</div>;
 
@@ -123,20 +90,12 @@ export default function DataPage() {
             Fill Form
           </Link>
           {submissions.length > 0 && (
-            <>
               <button
                 onClick={handleExportExcel}
                 className="btn-ghost border border-(--border)"
               >
                 📊 Download Excel
               </button>
-              <button
-                onClick={handleExportJSON}
-                className="btn-ghost border border-(--border)"
-              >
-                📦 Download JSON
-              </button>
-            </>
           )}
         </div>
       </div>

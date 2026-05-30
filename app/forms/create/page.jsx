@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth, useFormBuilderStore } from "@/lib/store";
+import { useFormBuilderStore } from "@/lib/store";
 import FieldCard from "@/components/FieldCard";
 
 const FIELD_TYPES = [
@@ -25,7 +25,7 @@ export default function CreatePage() {
     addField,
     reset,
   } = useFormBuilderStore();
-  const {user} = useAuth();
+  
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [add, setAdd] = useState(false);
@@ -45,7 +45,7 @@ export default function CreatePage() {
       const res = await fetch("/api/forms", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, userEmail: user.email, description, fields }),
+        body: JSON.stringify({ title, description, fields }),
       });
       const form = await res.json();
 
