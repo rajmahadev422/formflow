@@ -43,7 +43,7 @@ export default function Navbar() {
         <button
           onClick={toggle}
           aria-label="Toggle theme"
-          className="flex items-center rounded-lg border border-(--border) bg-(--bg-2) px-2.4 py-1.6 text-base text-(--text-2) transition-all duration-150 cursor-pointer"
+          className="flex items-center rounded-lg border border-(--border) bg-(--bg-2) px-3 text-base text-(--text-2) transition-all duration-150 cursor-pointer"
         >
           {theme === "dark" ? "☀️" : "🌙"}
         </button>

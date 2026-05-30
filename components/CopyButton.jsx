@@ -18,7 +18,7 @@ export default function CopyButton({ formId }) {
   return (
     <button
       onClick={handleCopy}
-      className="p-2 rounded hover:bg-gray-100 transition"
+      className="p-2 rounded bg-(--bg-2) hover:bg-(--bg-3) transition"
     >
       {copied ? <span>✔</span> : <span>🔗</span>}
     </button>
