@@ -25,7 +25,7 @@ export default function CreatePage() {
     addField,
     reset,
   } = useFormBuilderStore();
-  
+
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [add, setAdd] = useState(false);
@@ -109,53 +109,47 @@ export default function CreatePage() {
       )}
       {/* Builder Fields Toolbar Grid */}
 
-      <div className="h-50 perspective-[1000px] mb-6">
-  {/* The flipping element container */}
-  <div 
-    className={`relative w-full h-full transition-transform duration-500 transform-3d ${
-      add ? "transform-[rotateX(180deg)]" : "transform-[rotateX(0deg)]"
-    }`}
-  >
-    
-    {/* FRONT SIDE: The Add First Field Empty State Button */}
-    <div 
-      onClick={() => setAdd(true)}
-      className="absolute inset-0 w-full h-full backface-hidden bg-(--surface) border border-(--border) rounded py-12 px-6 text-center border-dashed cursor-pointer flex flex-col justify-center items-center"
-    >
-      <div className="text-4xl mb-3">➕</div>
-      <p className="text-(--text-2) m-0">
-        Add your first field using the toolbar below
-      </p>
-    </div>
+      {/* The flipping element container */}
+      <div
+        className={`mb-6 w-full h-full transition-transform duration-500 transform-3d ${
+          add ? "transform-[rotateX(180deg)]" : "transform-[rotateX(0deg)]"
+        }`}
+      >
+        {/* FRONT SIDE: The Add First Field Empty State Button */}
+        <div
+          onClick={() => setAdd(true)}
+          className="absolute inset-0 w-full h-full backface-hidden bg-(--surface) border border-(--border) rounded py-12 px-6 text-center border-dashed cursor-pointer flex flex-col justify-center items-center"
+        >
+          <div className="text-4xl mb-3">➕</div>
+          <p className="text-(--text-2) m-0">
+            Add your first field using the toolbar below
+          </p>
+        </div>
 
-    {/* BACK SIDE: The Field Selection Toolbar Grid */}
-    <div 
-      className="absolute inset-0 w-full h-full backface-hidden transform-[rotateX(180deg)] bg-(--surface-2) border border-(--border) rounded p-4 flex flex-col justify-center"
-    >
-      <div className="text-xs font-semibold text-(--text-3) tracking-widest mb-3 uppercase">
-        Add Field
+        {/* BACK SIDE: The Field Selection Toolbar Grid */}
+        <div className="w-full h-full backface-hidden transform-[rotateX(180deg)] bg-(--surface-2) border border-(--border) rounded p-4 flex flex-col justify-center">
+          <div className="text-xs font-semibold text-(--text-3) tracking-widest mb-3 uppercase">
+            Add Field
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {FIELD_TYPES.map((t) => (
+              <button
+                key={t.type}
+                onClick={() => {
+                  addField(t.type);
+                  setAdd(false);
+                }}
+                className="btn-ghost px-3.5 py-1.5 text-xs bg-(--surface) border border-(--border)"
+              >
+                <span className="font-mono font-bold text-(--accent)">
+                  {t.icon}
+                </span>{" "}
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="flex flex-wrap gap-2">
-        {FIELD_TYPES.map((t) => (
-          <button
-            key={t.type}
-            onClick={() => {
-              addField(t.type);
-              setAdd(false);
-            }}
-            className="btn-ghost px-3.5 py-1.5 text-xs bg-(--surface) border border-(--border)"
-          >
-            <span className="font-mono font-bold text-(--accent)">
-              {t.icon}
-            </span>{" "}
-            {t.label}
-          </button>
-        ))}
-      </div>
-    </div>
-
-  </div>
-</div>
 
       {/* Form Submission Actions Row */}
       <div className="flex gap-3 justify-end">
