@@ -6,7 +6,7 @@ export default function CopyButton({ formId }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(`https://formflow-mauve.vercel.app/view/${formId}`);
+    await navigator.clipboard.writeText(`${window.location.origin}/view/${formId}`);
 
     setCopied(true);
 

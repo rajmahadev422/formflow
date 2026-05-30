@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import CopyButton from "@/components/CopyButton";
+import ShareButton from "@/components/ShareButton";
 
 export default function DataPage() {
   const { id } = useParams();
@@ -88,6 +89,7 @@ export default function DataPage() {
         </div>
         <div className="flex gap-3 flex-wrap">
           <CopyButton formId={id} />
+          <ShareButton formId={id} title={form.title} desc={form.description}/>
           {submissions.length > 0 && (
             <button
               onClick={handleExportExcel}

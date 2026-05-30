@@ -85,7 +85,7 @@ export default function FormsPage() {
             >
 
               {/* Meta Content & Truncation */}
-              <div className="flex-1 min-w-0">
+              <div className="flex-1">
                 <div className="font-semibold text-[0.95rem] text-(--text) whitespace-nowrap overflow-hidden text-ellipsis">
                   {form.title}
                 </div>
