@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import CopyButton from "@/components/CopyButton";
+import ShareButton from "@/components/ShareButton";
 
 export default function FormsPage() {
   const [forms, setForms] = useState([]);
@@ -23,7 +23,7 @@ export default function FormsPage() {
     } catch (err) {
       console.log(err.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -36,8 +36,6 @@ export default function FormsPage() {
     await fetch(`/api/forms/${id}`, { method: "DELETE" });
     setForms((f) => f.filter((x) => x._id !== id));
   };
-
-
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-8">
@@ -83,7 +81,6 @@ export default function FormsPage() {
               className="bg-(--surface) border border-(--border) rounded-xl px-6 py-5 flex items-center gap-4 fade-up"
               style={{ animationDelay: `${i * 0.05}s` }}
             >
-
               {/* Meta Content & Truncation */}
               <div className="flex-1">
                 <div className="font-semibold text-[0.95rem] text-(--text) whitespace-nowrap overflow-hidden text-ellipsis">
@@ -97,8 +94,11 @@ export default function FormsPage() {
 
               {/* Actions Button Group */}
               <div className="flex gap-2 shrink-0 flex-wrap justify-end">
-                
-                <CopyButton formId={form._id}/>
+                <ShareButton
+                  formId={form._id}
+                  title={form.title}
+                  desc={form.description}
+                />
                 <Link
                   href={`/forms/data/${form._id}`}
                   className="bg-(--success-light) text-(--success) rounded-[7px] px-3.5 py-1.5 text-xs font-medium no-underline"
