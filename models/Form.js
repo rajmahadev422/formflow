@@ -11,6 +11,7 @@ const FormFieldSchema = new Schema({
 
 const FormSchema = new Schema(
   {
+    userEmail: { type: String, required: true },
     title: { type: String, required: true },
     description: { type: String },
     fields: [FormFieldSchema],

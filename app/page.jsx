@@ -1,6 +1,9 @@
-import LoginButton from "@/components/LoginButton";
+"use client"
 import Navbar from "@/components/Navbar";
+import { useAuth } from "@/lib/store";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const steps = [
   {
@@ -30,6 +33,15 @@ const features = [
 ];
 
 export default function LandingPage() {
+  const {data: session} = useSession();
+  const {setUser} = useAuth();
+
+    useEffect(() => {
+      if (session && session.user) {
+        setUser(session.user);
+      }
+    }, [session, setUser]);
+
   return (
     <div className="bg-(--bg)">
       <Navbar />
