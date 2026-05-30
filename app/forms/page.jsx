@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import CopyButton from "@/components/CopyButton";
 
 export default function FormsPage() {
   const [forms, setForms] = useState([]);
@@ -35,6 +36,8 @@ export default function FormsPage() {
     await fetch(`/api/forms/${id}`, { method: "DELETE" });
     setForms((f) => f.filter((x) => x._id !== id));
   };
+
+
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-8">
@@ -80,10 +83,6 @@ export default function FormsPage() {
               className="bg-(--surface) border border-(--border) rounded-xl px-6 py-5 flex items-center gap-4 fade-up"
               style={{ animationDelay: `${i * 0.05}s` }}
             >
-              {/* Form Icon Badge */}
-              <div className="w-10 h-10 rounded-xl bg-(--accent-light) flex items-center justify-center text-[1.1rem] shrink-0">
-                📝
-              </div>
 
               {/* Meta Content & Truncation */}
               <div className="flex-1 min-w-0">
@@ -98,12 +97,8 @@ export default function FormsPage() {
 
               {/* Actions Button Group */}
               <div className="flex gap-2 shrink-0 flex-wrap justify-end">
-                <Link
-                  href={`/view/${form._id}`}
-                  className="bg-(--accent-light) text-(--accent) rounded-[7px] px-3.5 py-1.5 text-xs font-medium no-underline"
-                >
-                  Fill
-                </Link>
+                
+                <CopyButton formId={form._id}/>
                 <Link
                   href={`/forms/data/${form._id}`}
                   className="bg-(--success-light) text-(--success) rounded-[7px] px-3.5 py-1.5 text-xs font-medium no-underline"
