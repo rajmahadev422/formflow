@@ -62,7 +62,7 @@ export default function FormsPage() {
           <p className="text-(--text-2) mb-6">
             No forms yet. Create your first one!
           </p>
-          <Link href="/create" className="btn-primary">
+          <Link href="/forms/create" className="btn-primary">
             ✨ Create Form
           </Link>
         </div>
